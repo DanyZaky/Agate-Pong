@@ -9,16 +9,6 @@ public class SideWall : MonoBehaviour
 
     // Pemain yang akan bertambah skornya jika bola menyentuh dinding ini.
     public PlayerControl player;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     // Akan dipanggil ketika objek lain ber-collider (bola) bersentuhan dengan dinding.
     void OnTriggerEnter2D(Collider2D anotherCollider)

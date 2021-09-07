@@ -23,9 +23,17 @@ public class BallControl : MonoBehaviour
         trajectoryOrigin = transform.position;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        
+        //Jika nilai rigidbody2d.velocity.magnitude (BallSpeed) tidak sama dengan 10, maka nilai rigidbody2d.velocity.magnitude (BallSpeed) nilainya 10
+
+        //Memanggil normalisasi agak memakan waktu (perlu akar kuadrat) tetapi Anda tidak akan melihat masalah apa pun jika Anda tidak menjalankan ribuan
+        //instance objek ini (dan saya kira fungsi ClampMagnitude tetap membutuhkan akar kuadrat dan akan tidak lebih efisien)
+
+        if (rigidBody2D.velocity.sqrMagnitude != 10f * 10f)
+        {
+            rigidBody2D.velocity = rigidBody2D.velocity.normalized * 10f;
+        }
     }
     void ResetBall()
     {
@@ -38,23 +46,20 @@ public class BallControl : MonoBehaviour
 
     void PushBall()
     {
-        // Tentukan nilai komponen y dari gaya dorong antara -yInitialForce dan yInitialForce
         float yRandomInitialForce = Random.Range(-yInitialForce, yInitialForce);
-
-        // Tentukan nilai acak antara 0 (inklusif) dan 2 (eksklusif)
         float randomDirection = Random.Range(0, 2);
 
-        // Jika nilainya di bawah 1, bola bergerak ke kiri. 
-        // Jika tidak, bola bergerak ke kanan.
         if (randomDirection < 1.0f)
         {
-            // Gunakan gaya untuk menggerakkan bola ini.
-            rigidBody2D.AddForce(new Vector2(-xInitialForce, -yRandomInitialForce));
+            rigidBody2D.AddForce(new Vector2(-xInitialForce, yRandomInitialForce));
         }
         else
         {
             rigidBody2D.AddForce(new Vector2(xInitialForce, yRandomInitialForce));
         }
+
+        //Tugas: Saya memaksakan nilai dari rigidbody2d.velocity.magnitude (BallSpeed) menjadi konstan dengan menerapkan pada method
+        // void FixedUpdate
     }
 
     void RestartGame()

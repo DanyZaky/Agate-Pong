@@ -8,8 +8,6 @@ public class PlayerControl : MonoBehaviour
     public KeyCode downButton = KeyCode.S;
 
     public float speed = 10.0f;
-
-    // Batas atas dan bawah game scene (Batas bawah menggunakan minus (-))
     public float yBoundary = 9.0f;
 
     private Rigidbody2D rigidBody2D;

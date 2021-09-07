@@ -23,6 +23,9 @@ public class GameManager : MonoBehaviour
     // Apakah debug window ditampilkan?
     private bool isDebugWindowShown = false;
 
+    // Objek untuk menggambar prediksi lintasan bola
+    public Trajectory trajectory;
+
     void Start()
     {
         player1Rigidbody = player1.GetComponent<Rigidbody2D>();
@@ -117,5 +120,8 @@ public class GameManager : MonoBehaviour
         {
             isDebugWindowShown = !isDebugWindowShown;
         }
+        trajectory.enabled = !trajectory.enabled;
     }
+
+
 }
