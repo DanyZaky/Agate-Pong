@@ -34,12 +34,6 @@ public class GameManager : MonoBehaviour
         ballCollider = ball.GetComponent<CircleCollider2D>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnGUI()
     {
         // Tampilkan skor pemain 1 di kiri atas dan pemain 2 di kanan atas
@@ -118,9 +112,10 @@ public class GameManager : MonoBehaviour
 
         if (GUI.Button(new Rect(Screen.width / 2 - 60, Screen.height - 73, 120, 53), "TOGGLE\nDEBUG INFO"))
         {
+            trajectory.enabled = !trajectory.enabled;
             isDebugWindowShown = !isDebugWindowShown;
         }
-        trajectory.enabled = !trajectory.enabled;
+        
     }
 
 

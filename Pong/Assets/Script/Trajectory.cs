@@ -51,19 +51,18 @@ public class Trajectory : MonoBehaviour
                     }
                     break;  
                 }  
-            }  
+            }
         }
         if (drawBallAtCollision)
         {
-            // Gambar bola "bayangan" di prediksi titik tumbukan
             ballAtCollision.transform.position = offsetHitPoint;
             ballAtCollision.SetActive(true);
         }
         else
         {
-            // Sembunyikan bola "bayangan"
             ballAtCollision.SetActive(false);
         }
+
     }
 
 
