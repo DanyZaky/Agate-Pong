@@ -25,18 +25,6 @@ public class BallControl : MonoBehaviour
         trajectoryOrigin = transform.position;
     }
 
-    void Update()
-    {
-        //Jika nilai rigidbody2d.velocity.magnitude (BallSpeed) tidak sama dengan 10, maka nilai rigidbody2d.velocity.magnitude (BallSpeed) nilainya 10
-
-        //Memanggil normalisasi agak memakan waktu (perlu akar kuadrat) tetapi Anda tidak akan melihat masalah apa pun jika Anda tidak menjalankan ribuan
-        //instance objek ini (dan saya kira fungsi ClampMagnitude tetap membutuhkan akar kuadrat dan akan tidak lebih efisien)
-
-        if (rigidBody2D.velocity.sqrMagnitude != ballSpeed * ballSpeed)
-        {
-            rigidBody2D.velocity = rigidBody2D.velocity.normalized * ballSpeed;
-        }
-    }
     void ResetBall()
     {
         // Reset posisi menjadi (0,0)
@@ -53,15 +41,18 @@ public class BallControl : MonoBehaviour
 
         if (randomDirection < 1.0f)
         {
-            rigidBody2D.AddForce(new Vector2(-xInitialForce, yRandomInitialForce));
+            rigidBody2D.AddForce(new Vector2(-xInitialForce, yRandomInitialForce).normalized, ForceMode2D.Impulse);
         }
         else
         {
-            rigidBody2D.AddForce(new Vector2(xInitialForce, yRandomInitialForce));
+            rigidBody2D.AddForce(new Vector2(xInitialForce, yRandomInitialForce).normalized, ForceMode2D.Impulse);
         }
 
-        //Tugas: Saya memaksakan nilai dari rigidbody2d.velocity.magnitude (BallSpeed) menjadi konstan dengan menerapkan pada method
-        // void Update
+        //Menggunakan Normalized terlebih dahulu agar sebuah vektor2 mempertahankan arah yang sama tetapi panjangnya bernilai default atau yg ditetapkan
+
+        //Lalu menambah parameter ForceMode2D.Impulse untuk menerapkan nilai impuls secara instan. Syntax ini tergantung pada massa benda tegar sehingga lebih banyak gaya yang harus diterapkan
+        //untuk memindahkan benda bermassa lebih tinggi dengan jumlah yang sama dengan benda bermassa lebih rendah.
+
     }
 
     void RestartGame()
